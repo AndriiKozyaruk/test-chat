@@ -1,15 +1,13 @@
 const initialState = {
     chatsList: [
-        { title: 'chat1', id: 1 }
     ],
     currentChat: {
-        title: 'chat1',
-        messages: [
-            { id: 1, text: 'some' },
-            { id: 2, text: 'some1' }
-        ]
-    }
+        messages: []
+    },
+    error: null,
+    loading: true
 };
+
 
 const reducer = (state = initialState, action) =>{
 
@@ -17,13 +15,26 @@ const reducer = (state = initialState, action) =>{
         case 'CHATS_LIST_LOADED':
             return {
                 ...state,
-                chatsList: action.payload
+                chatsList: action.chatList
             };
 
-        case 'CURRENT_CHAT_LOADED':
+        case 'CHAT_DATA_LOADED':
             return {
                 ...state,
-                currentChat: action.payload
+                currentChat: action.data
+            }
+
+        case 'INCOMING_NEW_MESSAGES':
+            console.log(action)
+            return{
+                ...state,
+                currentChat: {
+                    ...state.currentChat,
+                    messages: [
+                        ...state.currentChat.messages,
+                        ...action.messages
+                    ]
+                }
             }
 
         default:

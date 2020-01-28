@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { initializeSocket, sendMessage } from '../../actions'
 
-const ChatsList = ({ chatsList, openChatRoom }) =>{
+const ChatsList = ({ chatsList, dispatchInitializeSocket, dispatchSendMessage }) =>{
 
     const printChat = (chat)=>{
         return(
-            <li key={ chat.id } onClick={()=>openChatRoom(chat.id)}>
+            <li key={ chat._id }
+             onClick={()=>dispatchInitializeSocket(chat.title)}
+             >
                 { chat.title }
             </li>
         )
@@ -13,6 +16,7 @@ const ChatsList = ({ chatsList, openChatRoom }) =>{
 
     return (<ul>
         { chatsList.map( e => printChat(e) )}
+        <li onClick={()=>dispatchSendMessage('some body')}>some text</li>
     </ul>)
 }
 
@@ -21,6 +25,12 @@ const mapStateToProps = ({ chatsList }) => {
         chatsList: chatsList
     }
 }
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        dispatchInitializeSocket: (chatTitle) => dispatch(initializeSocket(chatTitle)),
+        dispatchSendMessage: (message) => dispatch(sendMessage(message))
+    }
+}
 
 
-export default connect(mapStateToProps)(ChatsList)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatsList)

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-const ChatRoom = ({currentChat}) =>{
+const ChatRoom = ({ currentChat }) =>{
 
     const Messages = () =>{
+        console.log(currentChat.messages)
         return currentChat.messages.map(message =>{
-            return <p key={ message.id }> { message.text } </p>
+            return <p key={ message._id }> { message.text } </p>
         })
     }
 
