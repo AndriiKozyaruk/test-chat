@@ -1,5 +1,3 @@
-Is you don't see the new messages just try to scroll down in element
-
 start front-end run
   npm start
 
@@ -9,5 +7,7 @@ build front-end run
 start beck-end run
   npm run start-server
 
-
-.env file must be in gitignore but this test task
+small comments:
+  .env file must be in gitignore but this test task
+  Is you don't see the new messages just try to scroll down in element
+  My backend part like a shit, but this test not about the back-end
