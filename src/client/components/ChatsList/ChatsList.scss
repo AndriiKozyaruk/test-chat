@@ -1,31 +1,35 @@
 .ChatsList {
-    $self: &;
+  $self: &;
 
-    height: 100%;
-    min-width: 320px;
-    background-color: #CFD8DC;
+  height: 100%;
+  min-width: 320px;
+  background-color: #CFD8DC;
 
-    #{ $self }__Item {
-        cursor: pointer;
-        padding: 20px 30px;
-        font-size: 20px;
-        text-transform: capitalize;
-        transition: all 0.4s;
-        min-height: 20px;
-        line-height: 20px;
+  #{ $self }__Item {
+    cursor: pointer;
+    padding: 20px 30px;
+    font-size: 20px;
+    text-transform: capitalize;
+    transition: all 0.4s;
+    min-height: 20px;
+    line-height: 20px;
 
-        &:hover{
-            background-color: #90A4AE;
-        }
+    &:hover{
+      background-color: #90A4AE;
     }
+  }
 
-    #{ $self }__NewChat {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
+  #{ $self }__NewChat {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 
-        input {
-            margin-bottom: 20px;
-        }
+    input {
+      margin-bottom: 20px;
     }
+  }
+  #{ $self }__ChatItemWrapper{
+    overflow: scroll;
+    max-height: 80%;
+  }
 }

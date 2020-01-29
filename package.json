@@ -3,7 +3,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "start-serv": "nodemon ./src/server/index.js"
+    "start-server": "nodemon ./src/server/index.js"
   },
   "version": "1.0.0",
   "description": "",

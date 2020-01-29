@@ -3,21 +3,21 @@ import ErrorIndicator from '../ErrorIndicator';
 
 
 export default class ErrorBoundary extends Component {
-    state = {
-        hasError: false
-    };
+  state = {
+    hasError: false
+  };
 
 
-    componentDidCatch() {
-        this.setState({ hasError: true });
-    };
+  componentDidCatch() {
+    this.setState({ hasError: true });
+  };
 
 
-    render(){
-        if(this.state.hasError){
-            return <ErrorIndicator />;
-        }
+  render(){
+    if(this.state.hasError){
+      return <ErrorIndicator />;
+    }
 
-        return this.props.children;
-    };
+    return this.props.children;
+  };
 }

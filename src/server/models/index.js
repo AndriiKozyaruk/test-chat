@@ -1,22 +1,23 @@
 const mongoose = require('mongoose');
 
 const chatSchema = new mongoose.Schema({
-    title: { type: String,  unique: true },
-    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]
+  title: { type: String,  unique: true },
+  key:    { type: mongoose.Schema.Types.ObjectId }
 });
 
-const message = new mongoose.Schema({
-    text:  { type: String,  unique: false },
-    autor: { type: String,  unique: false },
-    chatId: { type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }
+const messageSchema = new mongoose.Schema({
+  text: String,
+  textMessage: String,
+  autor: String,
+  chatId: { type: mongoose.Schema.Types.ObjectId, ref: 'Chats' }
 });
 
 
 
-const Chat = mongoose.model('Chat', chatSchema);
-const Message = mongoose.model('Message', message);
+const Chat = mongoose.model('Chats', chatSchema);
+const Message = mongoose.model('Messages', messageSchema);
 
 module.exports = {
-    Chat,
-    Message
+  Chat,
+  Message
 }

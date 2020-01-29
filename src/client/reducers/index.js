@@ -1,72 +1,63 @@
 const initialState = {
-    chatsList: [
-    ],
-    currentChat: {
-        title: '',
-        messages: [],
-        isOpen: false
-    },
-    error: null,
-    loading: true,
-    isSocketConected: false
+  chatsList: [
+  ],
+  currentChat: {
+    title: '',
+    messages: [],
+    isOpen: false
+  },
+  error: null,
+  loading: true,
+  isSocketConected: false
 };
 
 const addNewMessage = (state, action) =>{
-    const newMesseges = [ ...state.currentChat.messages, ...action.messages ]
-    return {
-        ...state,
-        currentChat: {
-            ...state.currentChat,
-            messages: newMesseges
-        }
+  const newMesseges = [ ...state.currentChat.messages, ...action.messages ]
+
+  return {
+    ...state,
+    currentChat: {
+      ...state.currentChat,
+      messages: newMesseges
     }
+  }
 }
 
 const reducer = (state = initialState, action) =>{
 
-    switch (action.type) {
-        case 'CHATS_LIST_LOADED':
-            return {
-                ...state,
-                chatsList: action.chatsList
-            };
+  switch (action.type) {
+    case 'CHATS_LIST_LOADED':
+      return {
+        ...state,
+        chatsList: action.chatsList
+      };
 
-        case 'NEW_CHAT_CREATED':
-            return {
-                ...state,
-                chatsList: [ ...state.chatsList, action.newChat ]
-            }
+    case 'NEW_CHAT_CREATED':
+      return {
+        ...state,
+        chatsList: [ ...state.chatsList, action.newChat ]
+      }
 
-        case 'CHAT_LOADED':
-            return {
-                ...state,
-                currentChat: { ...action.chat, isOpen: true },
-                chatIsOpen: true
-            }
+    case 'CHAT_LOADED':
 
-        case 'SOCKED_CONNECTED':
-            // console.l
-            return {
-                ...state,
-                isSocketConected: true
-            }
+      return {
+        ...state,
+        currentChat: { ...action.chat, isOpen: true },
+        chatIsOpen: true
+      }
 
-        case 'INCOMING_NEW_MESSAGES':
-            return addNewMessage(state, action)
+    case 'SOCKED_CONNECTED':
+      return {
+        ...state,
+        isSocketConected: true
+      }
 
-        case 'CHAT_CLOSED':
-            return {
-                ...state,
-                currentChat: {
-                    ...currentChat,
-                    isOpen: false
-                }
-            }
+    case 'INCOMING_NEW_MESSAGES':
+      return addNewMessage(state, action)
 
-
-        default:
-            return state
-    }
+    default:
+      return state
+  }
 };
 
 export default reducer

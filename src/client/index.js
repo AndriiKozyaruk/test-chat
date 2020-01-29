@@ -9,10 +9,10 @@ import store from './store';
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ErrorBoundary>
-            <App />
-        </ErrorBoundary>
-    </Provider>,
-    document.getElementById('app')
+	<Provider store={store}>
+		<ErrorBoundary>
+			<App />
+		</ErrorBoundary>
+	</Provider>,
+	document.getElementById('app')
 );

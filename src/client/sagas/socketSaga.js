@@ -1,4 +1,4 @@
-import { take, put, call, apply, delay, takeEvery } from 'redux-saga/effects'
+import { take, put, call, apply, delay, fork, takeEvery } from 'redux-saga/effects'
 import { eventChannel } from 'redux-saga'
 
 
@@ -25,7 +25,6 @@ function createSocketChannel(socket, chatTitle) {
 
         switch (channel) {
           case 'CHAT_LOADED':
-            console.log()
             return emit({ type: 'CHAT_LOADED', chat: { messages: messages, title: newChatTitle }})
           case 'INCOMING_NEW_MESSAGES':
             return emit({ type: 'INCOMING_NEW_MESSAGES', messages: messages })
@@ -35,6 +34,10 @@ function createSocketChannel(socket, chatTitle) {
     }
 
     socket.onerror = (event) => {
+      emit(new Error(event.reason))
+    }
+
+    socket.onclose = (event) =>{
       emit(new Error(event.reason))
     }
 
@@ -56,15 +59,13 @@ function sendSwitchChat (socket, payload) {
   socket.send(JSON.stringify({ type: 'INITIALIZE_ROOM', chatTitle: payload.chatTitle }))
 }
 
-
-function* watchOnSocket(payload) {
-  const { chatTitle } = payload
+function* watchOnSocket(rootPayload) {
+  const { chatTitle } = rootPayload
 
   const socket = yield new WebSocket('ws://localhost:3001')
 
   yield takeEvery('SEND_MESSAGE', sendMessage, socket)
   yield takeEvery('SWITCH_CHAT', sendSwitchChat, socket)
-
 
   const socketChannel = yield call(createSocketChannel, socket, chatTitle)
 
@@ -73,12 +74,11 @@ function* watchOnSocket(payload) {
       const payload = yield take(socketChannel)
 
       yield put(payload)
-      // yield fork(pong, socket)
     } catch(err) {
-        console.error('socket error:', err)
-        socketChannel.close()
+      console.log(err)
     }
   }
+
 }
 
 export function* watchOnInitializeSocket () {
