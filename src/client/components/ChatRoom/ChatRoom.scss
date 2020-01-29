@@ -1,0 +1,58 @@
+.ChatRoom {
+    $self: &;
+
+    padding: 20px 5px 5px 5px;
+    width: calc(100vw - 320px);
+    display: flex;
+    flex-direction: column;
+
+    #{ $self }__Header{
+        margin-left: 15px;
+    }
+
+    #{ $self }__Messeges{
+        padding-left: 15px;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+
+
+        #{ $self }__MessageItem {
+            background-color: #fff;
+            margin-right: auto;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            &:last-child{
+                margin-bottom: 10px;
+            }
+            h5 {
+                margin: 5px 0 5px 0;
+                font-size: 18px;
+            }
+            p {
+                margin: 5px 0 5px 0;
+                font-size: 16px;
+            }
+        }
+    }
+
+    #{ $self }__UserInput{
+        bottom: 0;
+        margin-top: auto;
+        display: inline-flex;
+        input{
+            width: 50%;
+            margin-right: 3px;
+        }
+        button {
+            width: 100px;
+        }
+        #{ $self }__Button--disable {
+            background-color: #455A64;
+            &:hover{
+                background-color: #455A64;
+            }
+        }
+    }
+}

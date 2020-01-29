@@ -1,36 +1,10 @@
 import React, { useState, Component } from 'react'
-import ChatsList from '../ChatList'
+import ChatsList from '../ChatsList'
 import ChatRoom from '../ChatRoom'
 import { connect } from 'react-redux'
 import { fetchChatList } from '../../actions'
 
-  // const socket = new WebSocket('ws://localhost:3001/');
-
-  // socket.onopen = function() {
-  //   // const msg = {
-  //   //   text: 'some_text', 
-  //   //   autor: 'my',
-  //   //   chatTitle: 'some'
-  //   // }
-  //   socket.send(JSON.stringify({ type: 'initial', chatTitle: 'some' }));
-  // };
-
-  // socket.onclose = function(event) {
-  //   if (event.wasClean) {
-  //     alert('Соединение закрыто чисто');
-  //   } else {
-  //     alert('Обрыв соединения'); // например, "убит" процесс сервера
-  //   }
-  //   console.log('Код: ' + event.code + ' причина: ' + event.reason);
-  // };
-
-  // socket.onmessage = function(event) {
-  //   console.log(event.data)
-  // };
-
-  // socket.onerror = function(error) {
-  //   console.log("Ошибка " + error);
-  // };
+import './App.scss'
 
 class App extends Component {
 
@@ -40,7 +14,7 @@ class App extends Component {
 
   render(){
     return (
-        <div>
+        <div className="App">
           <ChatsList />
           <ChatRoom />
         </div>

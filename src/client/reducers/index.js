@@ -2,12 +2,25 @@ const initialState = {
     chatsList: [
     ],
     currentChat: {
-        messages: []
+        title: '',
+        messages: [],
+        isOpen: false
     },
     error: null,
-    loading: true
+    loading: true,
+    isSocketConected: false
 };
 
+const addNewMessage = (state, action) =>{
+    const newMesseges = [ ...state.currentChat.messages, ...action.messages ]
+    return {
+        ...state,
+        currentChat: {
+            ...state.currentChat,
+            messages: newMesseges
+        }
+    }
+}
 
 const reducer = (state = initialState, action) =>{
 
@@ -15,27 +28,41 @@ const reducer = (state = initialState, action) =>{
         case 'CHATS_LIST_LOADED':
             return {
                 ...state,
-                chatsList: action.chatList
+                chatsList: action.chatsList
             };
 
-        case 'CHAT_DATA_LOADED':
+        case 'NEW_CHAT_CREATED':
             return {
                 ...state,
-                currentChat: action.data
+                chatsList: [ ...state.chatsList, action.newChat ]
+            }
+
+        case 'CHAT_LOADED':
+            return {
+                ...state,
+                currentChat: { ...action.chat, isOpen: true },
+                chatIsOpen: true
+            }
+
+        case 'SOCKED_CONNECTED':
+            // console.l
+            return {
+                ...state,
+                isSocketConected: true
             }
 
         case 'INCOMING_NEW_MESSAGES':
-            console.log(action)
-            return{
+            return addNewMessage(state, action)
+
+        case 'CHAT_CLOSED':
+            return {
                 ...state,
                 currentChat: {
-                    ...state.currentChat,
-                    messages: [
-                        ...state.currentChat.messages,
-                        ...action.messages
-                    ]
+                    ...currentChat,
+                    isOpen: false
                 }
             }
+
 
         default:
             return state

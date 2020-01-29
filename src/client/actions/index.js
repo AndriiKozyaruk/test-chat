@@ -1,16 +1,16 @@
-const chatsListLoaded = (chatList) =>{
-   return{
-        type: 'CHATS_LIST_LOADED',
-        chatList: chatList
-   };
-};
+// const chatsListLoaded = (chatsList) =>{
+//    return{
+//         type: 'CHATS_LIST_LOADED',
+//         chatsList: chatsList
+//    };
+// };
 
-const chatDataLoaded = (data) =>{
-    return {
-        type: 'CHAT_DATA_LOADED',
-        data: data
-    };
-};
+// const chatDataLoaded = (data) =>{
+//     return {
+//         type: 'CHAT_DATA_LOADED',
+//         data: data
+//     };
+// };
 
 const fetchChatList = () =>{
     return {
@@ -18,9 +18,23 @@ const fetchChatList = () =>{
     };
 };
 
+const fetchCreateNewChat = (chatName) =>{
+    return {
+        type: 'FETCH_CREATE_NEW_CHAT',
+        chatName: chatName
+    }
+}
+
+// const newChatCreated = (newChat) =>{
+//     return {
+//         type: 'NEW_CHAT_CREATED',
+//         newChat: newChat
+//     }
+// }
+
 const initializeSocket = (chatTitle) =>{
     return{
-        type: 'INITIALIZE_SOCKET',
+        type: 'INITIALIZE_CHAT_SOCKET',
         chatTitle: chatTitle
     }
 }
@@ -28,15 +42,22 @@ const initializeSocket = (chatTitle) =>{
 const sendMessage = (message) =>{
     return {
         type: "SEND_MESSAGE",
-        payload: message
+        message: message
+    }
+}
+
+const switchChat = (chatTitle) =>{
+    return {
+        type: "SWITCH_CHAT",
+        chatTitle: chatTitle
     }
 }
 
 
 export {
-    chatsListLoaded,
-    chatDataLoaded,
+    switchChat,
     fetchChatList,
     initializeSocket,
-    sendMessage
+    sendMessage,
+    fetchCreateNewChat
 };
