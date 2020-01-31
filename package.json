@@ -1,5 +1,5 @@
 {
-  "name": "texst-task-pragmatik",
+  "name": "texst-task",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
